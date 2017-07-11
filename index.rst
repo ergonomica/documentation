@@ -10,7 +10,7 @@ Welcome to Ergonomica's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   test
+   intro
 
 
 Indices and tables
