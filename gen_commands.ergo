@@ -1,3 +1,5 @@
+#!/usr/bin/env ergo
+
 #
 # gen_commands.ergo
 # Generate the Ergonomica documentation.
