@@ -2,6 +2,8 @@
  Configuration
 ===============
 
+This guide details how to customize the Ergonomica environments---both cosmetically and functionally.
+
 :code:`.ergo_profile`
 =====================
 
@@ -22,16 +24,8 @@ Ergonomica, if loaded with the :code:`--login` flag, will evaluate :code:`~/.erg
 
 - :code:`EDITOR`: The user's preferred text editor.
 - :code:`LANG`: The user's preferred language. Currently only EN (english) is implemented.
-- :code:`prompt`: The user's command-line prompt (known as PS1 in bash.)
-prompt = "[<directory>]\n.: "
-if platform.system() == "Darwin":
-    # i.e., macOS
-    self.path = subprocess.check_output(['/usr/libexec/path_helper', '-s'])[6:-15]
-else:
-    self.path = ""
-cpu_count = multiprocessing.cpu_count()
-
-
+- :code:`prompt`: The user's command-line prompt (known as PS1 in bash). Defaults to :code:`[<directory>]\n.: `; variables that are substituted in (to show relevant information) are :code:`<directory>` (the current directory) and :code:`<user>` (the current user).
+- :code:`path`: the PATH used for when looking for commands. Uses `/usr/libexec/path_helper` on Mac---otherwise it might need to be set (depending on what terminal emulator you use).
 
 :code:`toolbar` and :code:`rprompt`
 ===================================

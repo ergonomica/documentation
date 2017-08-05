@@ -466,10 +466,14 @@ Standard Library
 rprompt STRING
 --------------
 
-       rprompt: Set the text for the Ergonomica rprompt (next next to prompt).
+Set the text for the Ergonomica rprompt (next next to prompt).
 
-       Usage:
-          rprompt STRING
+Example
+~~~~~~~
+
+.. code::
+
+   rprompt "hi there :p"
 
     
 help

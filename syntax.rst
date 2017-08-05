@@ -8,8 +8,8 @@ Ergonomica is a fork of Scheme-based, Lisp-like languages. It's not purely funct
 
 However, ideally all commands will be generally written in a functional manner. It's syntax is that of S-expressions, with a few caveats:
 
-No outer parenthases
-~~~~~~~~~~~~~~~~~~~~
+No outer parentheses
+--------------------
 
 .. code:: lisp
 
@@ -18,7 +18,7 @@ No outer parenthases
    set x (+ 1 3 2)   # Ergonomica expression
 
 Any strings after the operation in S-Expressions interpreted as strings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------------------------------------
 
 In this example, the :code:`$` character is used to indicate variable substitution.
 
@@ -33,7 +33,7 @@ In this example, the :code:`$` character is used to indicate variable substituti
    
 
 Functions can have multiple return values (None values filtered out)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------------------------------------
 
 .. code:: lisp
 
@@ -44,7 +44,7 @@ Functions can have multiple return values (None values filtered out)
 
    
 Pipelines
-~~~~~~~~~
+---------
 
 Ergonomica has piping built into it's S-Expression syntax. These seperate commands and arguments within S-Expressions. All values that are piped are *explicitly specified*, with :code:`{}` syntax. This syntax is built around the concept of *blocks* being passed between items in a pipeline. The simplest example of a pipeline is simply passing all of the output of the previous command, like so
 
