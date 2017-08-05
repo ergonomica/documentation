@@ -26,6 +26,54 @@ Example
    2
    1
 
+\= ARGS...
+----------
+
+Returns :code:`True` if all arguments are equal, :code:`False` otherwise.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: = 2 2 2 2
+   True
+   .: = 9 10 9 9
+   False
+
+
+!\= ARGS...
+-----------
+
+Returns :code:`False` if all arguments are equal, :code:`True` otherwise.
+
+Example
+~~~~~~~
+
+.. code::
+
+   != 2 3 4 5
+   True
+   != 2 2 2 2 2
+   False
+
+
+not BOOL
+--------
+
+Returns not of boolean :code:`BOOL` (:code:`False` if :code:`Bool` is :code:`True`, :code:`True` if :code:`Bool` is :code:`False`).
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: not #t
+   False
+   .: not (= 2 3)
+   True
+
+
 sleep SECONDS
 -------------
 
@@ -414,18 +462,6 @@ Constants are unchangable values in the Ergonomica runtime. These values are pre
 Standard Library
 ================
 
-pyvim [FILES...]
------
-
-Pure Python Vim clone.
-
-Example
-~~~~~~~
-
-.. code::
-
-   pyvim ergo.py
-
         
 rprompt STRING
 --------------
@@ -438,18 +474,41 @@ rprompt STRING
     
 help
 ----
-help: the Ergonomica help system.
-    
-    Usage:
-        help commands
-    
-mkdir
------
-mkdir: Make a directory.
+The Ergonomica help system.
 
-    Usage:
-       mkdir DIR
+Example
+~~~~~~~
+
+.. code::
+
+   .: help commands # lists all commands (including user-defined) in Ergonomica namespace
+   ls
+   cd
+   .
+   .
+   .
+
     
+mkdir DIR
+---------
+
+Make directory :code:`DIR`.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: ls
+   example_file.jpeg
+   cute_cats.gif
+   .: mkdir example_directory
+   .: ls
+   example_file.jpeg
+   cute_cats.gif
+   example_directory
+
+
 cd DIR
 ------
 
@@ -458,42 +517,57 @@ Changes the directory to :code:`DIR`. If :code:`DIR` not specified, changes to t
 Example
 ~~~~~~~
 
-    Usage:
-        cd [DIR]
+.. code::
+
+   .: cd
+   .: pwd
+   /home/ghopper
+   .: cd subdir
+   .: pwd
+   /home/ghopper/subdir
+   .: cd
+   /home/ghopper
 
 
 pass
 ----
-pass: Does nothing.
 
-    Usage:
-       pass
+Does nothing.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: pass
+
     
-download
---------
+download URL
+------------
 
-    download: Download a remote file.
+Download a remote file at URL.
 
-    Usage:
-       download URL
-    
-cp
---
-cp: Copy files.
+Example
+~~~~~~~
 
-    Usage:
-        cp SOURCE DESTINATION
-    
-removeline
-----------
-removeline: Remove lines with indices LINENUM from FILE.
+.. code::
 
-    Usage:
-        removeline (-f FILE) <int>LINENUM...
+   .: download http://google.com
+   .: read google.com
+   <!doctype html><html itemscope=""
+   .
+   .
+   .
 
-    Options:
-        -f --file  Specify the file to operate on.
-    
+
+cp SOURCE DESTINATION
+---------------------
+
+Copies the file at :code:`SOURCE` to :code:`DESTINATION`.
+
+Example
+~~~~~~~
+
 find
 ----
 find: Find patterns.
@@ -640,17 +714,11 @@ time
     Usage:
         time [FORMAT]
     
-nequal
-------
-nequal: Compare if arguments are not equal.
-
-    Usage:
-       nequal A B
-    
 pwd
 ---
 
 Prints the working directory.
+
 
 Example
 ~~~~~~~
@@ -661,48 +729,68 @@ Example
    /home/edijkstra
 
     
-rm
----
+rm FILE
+-------
 
-rm: Remove files and directories.
+Removes file or directory :code:`FILE`.
 
-    Usage:
-       rm <file/directory>FILE
-    
-write_documentation_with_command
---------------------------------
-usage: function COMMAND
-addstring
----------
-addstring: Add all strings from STDIN.
+Example
+~~~~~~~
 
-    Usage:
-       addstring [-s | --separator SEPARATOR]
-    
-    
+.. code::
+
+   .: ls
+   example_dir
+   funny_picture.jpeg
+   serious_picture.png
+   .: rm example_dir
+   .: ls
+   funny_picture.jpeg
+   serious_picture.png
+   .: rm funny_picture.jpeg
+   .: ls
+   serious_picture.png
+
+
 sysinfo
 -------
 
-    sysinfo: Print system information
+Provides system-specific information.
 
-    Usage:
-       sysinfo stat [-apr]
-       sysinfo dyn  [-cu]
+Example
+~~~~~~~
 
-    Options:
-       -a --architecture   Print the system bits as well as linkage.
-       -p --processor      Print processor name.
-       -o --os             Print OS common name.
-       -c --cpu-count       Print the number of CPUs on the system.
-       -u --percent-usage  Print percent CPU usage for each CPU.
+.. note:: In :code:`sysinfo`, :code:`stat` means static (i.e., unchanging information about the system), whereas :code:`dyn` means dynamic (i.e., values that change).
+
+.. code::
+
+   .: sysinfo stat -a # architecture
+   64bit,
+   .: sysinfo stat -p # processor
+   amdk6
+   .: sysinfo stat -r # OS
+   Linux-4.12.3-1-ARCH-x86_64-with-arch
+   .: sysinfo stat -c # number of cores
+   8
+   .: sysinfo dyn -u # individual CPU usage percentage
+   [1.6, 1.5, 1.8, 1.9]
+   .: sysinfo stat -ap # combine and flags and get outputs for each
+   64bit,
+   amdk6
+
     
 toolbar STRING
 --------------
 
-       toolbar: Set the text for the Ergonomica toolbar (bar at bottom of screen).
+Set the text for the Ergonomica toolbar (bar at bottom of screen).
 
-       Usage:
-          toolbar STRING
+Example
+~~~~~~~
+
+.. code::
+
+   toolbar "MY SUPER COOL TOOLBAR :)"
+
     
 license (show w | show c)
 -------------------------
@@ -743,6 +831,7 @@ Make a cow say :code:`STRING`.
                  ||----w |
    	         ||     ||
 
+
 environment set VARIABLE VALUE
 ------------------------------
 
@@ -754,7 +843,6 @@ Example
 .. code::   
    .: environment set prompt "[test@home]: "
    [test@home]: # prompt has changed
-
 
 
 clear
@@ -770,11 +858,12 @@ Example
 
    .: clear # clears the screen
 
-
     
 whoami
 ------
+
 Returns the current user.
+
 
 Example
 ~~~~~~~
@@ -784,6 +873,18 @@ Example
    .: whoami
    kernighan
     
+pyvim [FILES...]
+----------------
+
+Pure Python Vim clone.
+
+Example
+~~~~~~~
+
+.. code::
+
+   pyvim ergo.py # opens ergo.py in pyvim
+
 
 epm
 ---
@@ -796,6 +897,7 @@ Example
 ~~~~~~~
 
 .. code::
+
    .: epm install PACKAGES...     # installs all PACKAGES
    .: epm uninstall PACKAGES...   # uninstalls all PACKAGES
    .: epm packages (local|remote) # lists packages on machine (local) or in repos (remote)
