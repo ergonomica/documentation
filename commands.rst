@@ -4,7 +4,7 @@
 
 A list of all Ergonomica builtins and standard library functions.
 
-**NOTE**: In all guides, :code:`.:` represents an Ergonomica prompt---lines without this heading are output of the commands.
+.. note:: In all guides, :code:`.:` represents an Ergonomica prompt---lines without this heading are output of the commands.
 
 Builtins
 ========
@@ -96,7 +96,9 @@ Example
 ^ A B
 -----
 
-Raises A to the power of B (i.e., :code:`A^B` or :code:`A**B`). *Note*: this is not bitwise XOR like Python's syntax.
+Raises A to the power of B (i.e., :code:`A^B` or :code:`A**B`).
+
+.. note:: :code:`^` is not bitwise XOR like Python's (and other languages') syntax.
 
 
 Example
@@ -412,16 +414,21 @@ Constants are unchangable values in the Ergonomica runtime. These values are pre
 Standard Library
 ================
 
-pyvim
+pyvim [FILES...]
 -----
 
-        pyvim: Pure Python Vim clone.
+Pure Python Vim clone.
 
-        Usage:
-            pyvim [FILES...]
+Example
+~~~~~~~
+
+.. code::
+
+   pyvim ergo.py
+
         
-rprompt
--------
+rprompt STRING
+--------------
 
        rprompt: Set the text for the Ergonomica rprompt (next next to prompt).
 
@@ -443,9 +450,13 @@ mkdir: Make a directory.
     Usage:
        mkdir DIR
     
-cd
---
-cd: Changes the directory.
+cd DIR
+------
+
+Changes the directory to :code:`DIR`. If :code:`DIR` not specified, changes to the user's home directory.
+
+Example
+~~~~~~~
 
     Usage:
         cd [DIR]
@@ -497,13 +508,6 @@ find: Find patterns.
     -s --strict-path  Require that file regexp matches full path to the file.
 
     
-if
---
-if: If this, do that.
-
-    Usage:
-       if FUNCTION1 FUNCTION2 [FUNCTION3]
-    
 quit
 ----
 quit: Exit the Ergonomica shell.
@@ -525,13 +529,6 @@ title: Set the title of the current terminal window to TITLE.
     Usage:
         title TITLE
     
-graph
------
-graph: Graph numbers in your terminal.
-    
-    Usage:
-        graph NUMBERS...
-    
 py
 --
 py: Python ergonomica integration.
@@ -548,14 +545,6 @@ ping: Ping HOSTNAMEs.
 
     Options:
         -c --count  Specify the number of times to ping the server.
-    
-length
-------
-length: Return the number of items in STDIN.
-
-    Usage:
-        length
-        length STRING
     
 write
 -----
@@ -591,35 +580,30 @@ ls
        -h --hide-dotfiles  Ignore dotfiles.
        -c --count-files    Return the number of files in a directory.
     
-print
------
-
-    print: Print strings.
-
-    Usage:
-       print <string>[STRINGS...] [-m MULTIPLIER] [-f INDICES...]
-
-    Options:
-       -f --filter     INDICES  Print the items of the input with the specified indices.
-       -m --multiplier MULTIPLIER    Print the given item COUNT times (seperated by newlines).
-    
-mul
----
-mul: Multiply a string N times.
-
-    Usage:
-        mul STRING N
-    
 net
 ---
-net: Various network information commands.
-    Usage:
-        net ip (local|global)
-        net mac INTERFACE
-        net interfaces
-    
-size
-----
+
+Various network information commands.
+
+Example
+~~~~~~~
+
+.. code::
+   
+   .: net ip local
+   192.168.0.4
+   .: net ip global
+   38.123.71.82
+   .: net mac INTERFACE
+   98:e1:d2:a9:c3:e2
+   .: net interfaces
+   lo
+   wlp3s0
+
+
+size [-u UNIT] FILE...
+----------------------
+
 size: Return the sizes of files.
 
     Usage:
@@ -629,53 +613,24 @@ size: Return the sizes of files.
         -u, --unit  Specify the unit of size in which to display the file.
 
     
-swap
-----
-swap: Swap the names/contents of two files.
+swap FILE1 FILE2
+----------------
+
+Swap the names/contents of two files.
 
     Usage:
         swap <file>FILE1 <file>FILE2
-    
-sort
-----
-sort: Sort files into folders based on match of regex EXPRESSION in their names.
 
-    Usage:
-        sort [DIR=.] EXPRESSION
-    
-map
----
 
-    map: Map an argument on STDIN.
+read FILE
+---------
 
-    Usage:
-       map ARGS...
-       map -b BLOCKSIZE ARGS...
+Reads the lines of FILE.
 
-    Options:
-       -i --ignore-blocksize  If the last block is not complete, ignore.
-    
-users
------
-users: Returns a list of currently logged in users.
+Example
+~~~~~~~
 
-    Usage:
-        users
-    
-get
----
-get: Get the value of a variable.
 
-    Usage:
-       get <variable>VAR
-    
-read
-----
-
-    read: Read a file.
-
-    Usage:
-       read FILE
     
 time
 ----
@@ -694,13 +649,21 @@ nequal: Compare if arguments are not equal.
     
 pwd
 ---
-pwd: Print the working directory.
 
-    Usage:
-        pwd
+Prints the working directory.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: pwd
+   /home/edijkstra
+
     
 rm
---
+---
+
 rm: Remove files and directories.
 
     Usage:
@@ -733,96 +696,109 @@ sysinfo
        -c --cpu-count       Print the number of CPUs on the system.
        -u --percent-usage  Print percent CPU usage for each CPU.
     
-toolbar
--------
+toolbar STRING
+--------------
 
        toolbar: Set the text for the Ergonomica toolbar (bar at bottom of screen).
 
        Usage:
           toolbar STRING
     
-license
--------
-license: Return Ergonomica license information.
+license (show w | show c)
+-------------------------
 
-    Usage:
-        license (show w|show c)
-    
-cow
----
-cow: Make a cow say STRING.
+Show Ergonomica license information. If :code:`show c` specified, prints the copyright of Ergonomica. :code:`show w` displays the full text of the GPLv2 license.
 
-    Usage:
-        cow STRING
-    
-environment
------------
+Example
+~~~~~~~
 
-       environment: Configure environment variables.
+.. code::
 
-       Usage:
-          environment set VARIABLE VALUE
-          environment macro add REGEXP REPLACEMENT
-          environment alias add COMMAND REPLACEMENT
-    
-split
------
-split: Split a string.
+   .: show c
+   Ergonomica  Copyright (C) 2017  Liam Schumm, Andy Merrill, Dhyan Patel, Pavel Golubev
+   .: show w
+                     GNU GENERAL PUBLIC LICENSE
+		                          Version 3, 29 June 2007
 
-    Usage:
-        split STRING SEP
-    
+	Copyright (C) 2007 Free Software Foundation, Inc.
+	.
+	.
+	.
+
+
+cow STRING
+----------
+
+Make a cow say :code:`STRING`.
+
+.. code::
+
+   .: cow 123
+    _____
+   < 123 >
+    -----
+       \    ^__^
+        \   (oo)\_______
+            (__)\        )\/\
+                 ||----w |
+   	         ||     ||
+
+environment set VARIABLE VALUE
+------------------------------
+
+Configure environment variables. :doc:`configuration` has more information on what variables may be set.
+
+Example
+~~~~~~~
+
+.. code::   
+   .: environment set prompt "[test@home]: "
+   [test@home]: # prompt has changed
+
+
+
 clear
 -----
-clear: Clear the screen.
 
-    Usage:
-       clear
-    
-equal
------
-equal: Compare equality of arguments.
+Clears the screen.
 
-    Usage:
-        equal A B
-    
-try
----
-try: handle error catching
-    
-    Usage:
-        try BODY
-        try BODY EXCEPTION
-    
-alias
------
-alias: Map commands to names.
-    Usage:
-        alias NAME FUNCTION
-    
-while
------
-while: While CONDITION returns true, do BODY.
 
-    Usage:
-        while CONDITION BODY
-    
-epm
----
-epm: Ergonomica's package manager.
+Example
+~~~~~~~
 
-    Usage:
-        epm install PACKAGES...
-        epm uninstall PACKAGES...
-        epm packages (local|remote)
-        epm repos
-        epm update
-        epm add-source NAME URL
+.. code::
+
+   .: clear # clears the screen
+
+
     
 whoami
 ------
-whoami: Return the current user.
+Returns the current user.
 
-    Usage:
-       whoami
+Example
+~~~~~~~
+
+.. code::
+
+   .: whoami
+   kernighan
     
+
+epm
+---
+
+.. note:: :code:`epm` is not integrated with Ergonomica itself, but is bundled for optional installation with the Ergonomica pip installer.
+
+Ergonomica's package manager.
+
+Example
+~~~~~~~
+
+.. code::
+   .: epm install PACKAGES...     # installs all PACKAGES
+   .: epm uninstall PACKAGES...   # uninstalls all PACKAGES
+   .: epm packages (local|remote) # lists packages on machine (local) or in repos (remote)
+   .: epm repos                   # lists all repos
+   .: epm update                  # updates all package listings
+   .: epm add-source NAME URL     # add a new repo with a title and URL to a MANIFEST
