@@ -5,6 +5,7 @@
 To make commands in Ergonomica, you have two options. The first is to make a "shell command"; this is what is found in the Ergonomica standard library. This takes in, and only takes in, an :code:`argc` argument. This is an :code:`ArgumentsContainer` object. :code:`argc.ns` is the Ergonomica namespace, :code:`argc.env` is the :code:`Environment`, and :code:`argc.args` are the command-line arguments parsed with docopt according to the docstring. Here's the implementation of the standard library :code:`ls` command for reference:
 
 .. code:: python
+
    #!/usr/bin/python
    # -*- coding: utf-8 -*-
    
@@ -60,6 +61,7 @@ To make commands in Ergonomica, you have two options. The first is to make a "sh
            return files
            
    exports = {'ls': ls}
+
 
 Other commands are just regular Python ones, like builtin :code:`randint`:
 
