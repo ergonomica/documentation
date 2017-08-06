@@ -20,8 +20,8 @@ To install simply run
 
    syntax	     
    commands
-   installation   
-
+   writing_commands
+   
 Indices and tables
 ==================
 
