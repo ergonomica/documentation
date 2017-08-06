@@ -103,3 +103,15 @@ You may specify the blocksize explicitly like so:
     c.txt
 
 And we have our desired result! :code:`{}` substitution may be done for an arbitrary number of substitutions, in place of regular arguments.
+
+System Commands
+---------------
+
+When Ergonomica does not find a command in its namespace, it then runs it using :code:`subprocess`. As a result, most normal commands should work exactly how you would expect---they may be used in expressions, used in Ergonomica pipelines, and everything else a normal command would do. However, there is an override for running commands using :code:`os.system`, which may be required for some interactive commands (such as :code:`less`). This override is a :code:`%` at the beginning of a commnad, like so:
+
+.. code::
+
+   %less example.html
+
+.. note:: This prefix may also be used to force a command to be run by the system instead of Ergonomica (however full paths like :code:`/bin/bash` also work).
+	  

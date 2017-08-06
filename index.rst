@@ -20,4 +20,5 @@ To install simply run
 
    syntax	     
    commands
+   configuration
    writing_commands
