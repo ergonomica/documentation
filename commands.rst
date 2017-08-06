@@ -73,7 +73,20 @@ Example
    .: not (= 2 3)
    True
 
+apply FUNCTION ARGS
+-------------------
 
+Runs :code:`FUNCTION` with arguments :code:`ARGS`.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: set x (list 1 2 3)
+   .: apply $= $x
+   False
+   
 sleep SECONDS
 -------------
 
@@ -572,91 +585,215 @@ Copies the file at :code:`SOURCE` to :code:`DESTINATION`.
 Example
 ~~~~~~~
 
+.. code::
+
+   .: ls
+   a.txt
+   .: read a.txt
+   here is my file!
+   :) catch you on the flipside!
+   .: cp a.txt b.txt
+   .: ls
+   a.txt
+   b.txt
+   .: read b.txt
+   here is my file!
+   catch you on the flipside!
+
 find
 ----
-find: Find patterns.
 
-    Usage:
-        find PATTERN
-        find file PATTERN [-f | --flat] [-s | --strict-path]
-        find string PATTERN [-f | --flat]
+Find files and patterns within files.
 
-    Options:
-    -f --flat         Do not search recursively (search only the current directory).
-    -s --strict-path  Require that file regexp matches full path to the file.
+Example
+~~~~~~~
 
-    
+.. code::
+
+   .: find file .*rst # match files with regex
+   ./a/b.rst
+   ./c.rst
+   ./z/example.rst
+   .: find -f file .*rst # -f or --flat means search only in current dir
+   ./c.rst
+   .: find -s file [^z]*rst # -s mandates the regexp must match the full path
+   ./a/b.rst
+   ./c.rst
+   .: find -sf file [^z]*rst # combine flags
+   ./c.rst
+   .: find string 2.71828 # find strings in files
+   ./c.rst: return 2.71828 + 3
+   ./z/example.rst: return "My favorite number is 2.71828!!!"
+   .: find -f string 2.71828 # also limit your search to the current dir
+   ./c.rst: return 2.71828 + 3
+
+
 quit
 ----
-quit: Exit the Ergonomica shell.
 
-    Usage:
-       quit
-    
+Exits the Ergonomica shell.
+
+Example
+~~~~~~~
+
+.. code::
+
+   quit
+
+
 list_modules
 ------------
-list_modules: List all installed modules.
+List all installed modules (packages in :code:`~/.ergo/packages`).
 
-    Usage:
-        list_modules
-    
-title
------
-title: Set the title of the current terminal window to TITLE.
+Example
+~~~~~~~
 
-    Usage:
-        title TITLE
+.. code::
+
+   .: list_modules
+   epm
+   vortex
+
+
+title TITLE
+-----------
+
+Set the title of the current terminal window to TITLE.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: title "My Super COOl Terminal!11"
+
     
 py
---
-py: Python ergonomica integration.
+---
 
-    Usage:
-       py [(--file FILE | STRING)]
-    
+Python ergonomica integration.
+
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: py "1+1" # simple expressions
+   2
+   .: py "l = 2" # set variables...
+   .: print $l   # and get them in the Ergonomica namespace!
+   2
+   .: py # open up the PtPython REPL (all variables here are also shared)
+   >>>
+   .
+   .
+   .
+
+
 ping
 ----
+
 ping: Ping HOSTNAMEs.
 
-    Usage:
-        ping [-c COUNT] HOSTNAMES...
+Example
+~~~~~~~
 
-    Options:
-        -c --count  Specify the number of times to ping the server.
-    
-write
------
-write: Write STDIN to file FILE.
+.. warning:: The output won't be exactly what's shown here; there'll likely be some output printed to STDOUT (since this calls a system process); however what is shown here is what is actually returned by this function.
 
-    Usage:
-        write <file>FILE
-    
-mv
---
-mv: Move files.
+.. code::
 
-    Usage:
-       mv TARGET DESTINATION
+   .: ping 8.8.8.8 
+   8.8.8.8 is up # returned on ctrl-c (ping process continues to run)
+   .: ping -c 2 8.8.8.8 INVALIDADDRESS
+   8.8.8.8 is up
+   INVALIDADDRESS is down
+
+
+write FILE [LINES...]
+---------------------
+
+Write lines to a file.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: ls
+   unrelated.jpeg
+   .: write test_file 123123 # create a new file
+   .: ls
+   test_file
+   unrelated.jpeg
+   .: read test_file
+   123123
+   .: write test_file abcabc # only appends; does not overwrite
+   .: read test_file
+   123123
+   abcabc
+
     
+mv TARGET DESTINATION
+---------------------
+
+Move a file from :code:`TARGET` to :code:`DESTINATION`.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: ls
+   a.txt
+   .: mv a.txt b.txt
+   .: ls
+   b.txt
+
+
 exit
 ----
-exit: Exit the Ergonomica shell.
 
-    Usage:
-       exit
-    
-ls
---
+Exits the Ergonomica shell.
 
-    ls: List files in a directory.
+Example
+~~~~~~~
 
-    Usage:
-       ls <directory>[DIR] [-c | --count-files][-d | --date] [-h | --hide-dotfiles]
+.. code::
 
-    Options:
-       -d --date           Show file creation dates.
-       -h --hide-dotfiles  Ignore dotfiles.
-       -c --count-files    Return the number of files in a directory.
+   exit
+
+
+
+ls <directory>[DIR] [-c | --count-files][-d | --date] [-h | --hide-dotfiles]
+----------------------------------------------------------------------------
+
+List files in a directory.
+
+Example
+~~~~~~~
+
+.. warning:: :code:`ls` shows dotfiles by default. To disable this, use the :code:`-h` or :code:`--hide-dotfiles` flag.
+
+.. code::
+
+   .: ls # list files as you normally would
+   .example_dotfile
+   a.txt
+   b.c
+   a.out
+   .: ls -d # list the creation dates
+   2012-18-03 09:35:21.293598 .example_dotfile
+   2015-21-04 08:29:46.981327 a.txt
+   2017-02-09 02:96:93.191238 b.c
+   2016-13-02 04:38:72.912840 a.out
+   .: ls -h # hide dotfiles
+   a.txt
+   b.c
+   a.out
+   .: ls -c # return the number of files in a directory
+   4
+   .: ls -ch # count files without dotfiles
     
 net
 ---
@@ -836,8 +973,8 @@ Make a cow say :code:`STRING`.
    	         ||     ||
 
 
-environment set VARIABLE VALUE
-------------------------------
+environment
+-----------
 
 Configure environment variables. :doc:`configuration` has more information on what variables may be set.
 
@@ -847,6 +984,8 @@ Example
 .. code::   
    .: environment set prompt "[test@home]: "
    [test@home]: # prompt has changed
+   .: environment get prompt
+   [test@home]:
 
 
 clear
