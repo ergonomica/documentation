@@ -21,10 +21,3 @@ To install simply run
    syntax	     
    commands
    writing_commands
-   
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
