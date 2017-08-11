@@ -511,6 +511,21 @@ mkdir DIR
 
 Make directory :code:`DIR`.
 
+temp
+----
+
+Returns a valid temporary file or directory valid for the current operating system.
+
+Example
+~~~~~~~
+
+.. code::
+   .: temp file
+   /tmp/tmp5hismn70
+   .: temp dir
+   /tmp/tmp42d49ak9
+
+
 Example
 ~~~~~~~
 
