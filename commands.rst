@@ -360,9 +360,36 @@ Example
    3
 
 
-find
+search REGEX
+------
 
-replace
+Searches (and returns) all matches of :code:`REGEX` in :code:`STRING`.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: search "[A-Z][a-z]+" "This is a String."
+   This
+   String
+
+
+replace REGEX SUB STRING
+------------------------
+
+Replaces all matches of :code:`REGEX` in :code:`STRING` with :code:`SUB`.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: replace "[a-z]" "9" basfdbasdifbas4145
+   999999999999994145
+   .: replace silly serious "this is a very silly string"
+   this is a very serious string
+
 
 ?file FILE
 ----------
@@ -397,6 +424,17 @@ Example
    .: ?dir /etc/fstab
    False
 
+?match REGEX STRING
+-------------------
+
+Returns the match of :code:`REGEX` in :code:`STRING` (if it matches), else it returns :code:`False`.
+
+.. code::
+
+   .: match "[a-c]+" "abababababc"
+   abababababc
+   .: match "[a-c]+" "ddddd"
+   False
 
 flatten LIST
 ------------
@@ -763,10 +801,10 @@ Example
    INVALIDADDRESS is down
 
 
-write FILE [LINES...]
----------------------
+write [-a] FILE [LINES...]
+--------------------------
 
-Write lines to a file.
+Write lines to a file. Will overwrite file unless :code:`-a` (append) option is called.
 
 Example
 ~~~~~~~
@@ -781,7 +819,7 @@ Example
    unrelated.jpeg
    .: read test_file
    123123
-   .: write test_file abcabc # only appends; does not overwrite
+   .: write test_file -a abcabc # only appends; does not overwrite
    .: read test_file
    123123
    abcabc
