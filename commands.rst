@@ -360,6 +360,44 @@ Example
    3
 
 
+find
+
+replace
+
+?file FILE
+----------
+
+Returns :code:`True` if :code:`FILE` is a valid file, :code:`False` if it isn't.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: ?file /etc/fstab
+   True
+   .: ?file /etc
+   False
+   .: ?file /qj0jq0-9qri0w5i0q9wi0tiw09ti
+   False
+
+
+?dir DIR
+--------
+
+Returns :code:`True` if :code:`DIR` is a valid directory, :code:`False` if it isn't.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: ?dir /etc
+   True
+   .: ?dir /etc/fstab
+   False
+
+
 flatten LIST
 ------------
 
