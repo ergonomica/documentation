@@ -292,7 +292,58 @@ Example
    list
    .: type example_string
    str
+   .: type $ls
+   function
 
+
+str OBJECT
+----------
+
+Converts :code:`OBJECT` to a string.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: type 1
+   int
+   .: type (str 1)
+   str
+
+
+int OBJECT
+----------
+
+Converts :code:`OBJECT` to an integer.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: int "123"
+   123
+   .: int 3.104
+   3
+   
+
+float OBJECT
+------------
+
+Converts :code:`OBJECT` to a floating-point number.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: float "1.023"
+   1.023
+   .: float 3
+   3.0
+
+   
 first ARRAY
 -----------
 
