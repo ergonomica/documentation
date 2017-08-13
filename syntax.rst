@@ -115,3 +115,19 @@ When Ergonomica does not find a command in its namespace, it then runs it using 
 
 .. note:: This prefix may also be used to force a command to be run by the system instead of Ergonomica (however full paths like :code:`/bin/bash` also work).
 	  
+if/elif/else statements
+-----------------------
+
+In Ergonomica, as with similar functional programming languages, the only statement in the language is the :code:`if/elif/else` statement. It is used to execute certain code when a certain condition satisfies (or doesn't satisfy) a given condition. For example, to detect whether a number is greater than five,
+
+.. code::
+
+   if (> $n 5) (print "It is greater than five!") else (print "It isn't greater than five...")
+
+Or to test for a variety of different conditions, the :code:`elif` statement can be used to evalute a statement only if the previous condition *wasn't* true and the current condition is,
+
+.. code::
+
+   if (> $n 5) (print "It's greater than five.") elif (> $n 0) (print "Well at least it's positive.") else (print "Well shucks")
+
+.. note:: These statements may have linebreaks in any location; for example, each :code:`elif` could be on a newline. This does not affect their behavior.
