@@ -395,6 +395,24 @@ Example
 .. note:: Just using :code:`-` here wouldn't be sufficient since any token after the function (:code:`accum` here) will be interpreted as a string unless it has a :code:`$` prefix.
    
 
+filter OPERATOR LIST
+====================
+
+Returns every item in :code:`LIST` that returns a truthy value under :code:`OPERATOR`.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: find all .*
+   ./a
+   ./a/b.txt
+   ./c.jpeg
+   .: filter $?dir (find all .*)
+   ./a
+
+
 search REGEX
 ------
 
@@ -756,6 +774,12 @@ Example
    ./a/b.rst
    ./c.rst
    ./z/example.rst
+   .: find dir .* # match directories too
+   ./a
+   ./z
+   .: find all [a-c].* # find files and directories with 'all' directive
+   ./a
+   ./c.rst
    .: find -f file .*rst # -f or --flat means search only in current dir
    ./c.rst
    .: find -s file [^z]*rst # -s mandates the regexp must match the full path
@@ -768,7 +792,7 @@ Example
    ./z/example.rst: return "My favorite number is 2.71828!!!"
    .: find -f string 2.71828 # also limit your search to the current dir
    ./c.rst: return 2.71828 + 3
-
+   
 
 quit
 ----
