@@ -43,3 +43,17 @@ Add hashbangs to any Python file (if they don't exist)
                           (write {0} (+ (list "#!/usr/bin/env python") (read {0})))
 
 			  
+Define a function to go up one directory N times
+================================================
+
+.. code::
+
+   set up (lambda (n) (
+           if (!= n 0) (
+	       up (- $n 1)))
+	   (cd ..))
+
+Explanation
+~~~~~~~~~~~
+
+This defines a function, :code:`up`, which operates recursively on a depth :code:`n`. Until :code:`n` is 0, it invokes itself again (decrementing :code:`n` by 1), going up one directory level each time, until :code:`n` reaches :code:`0`.

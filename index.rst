@@ -20,6 +20,7 @@ To install simply run
 
    syntax	     
    commands
+   examples
    configuration
    writing_commands
    releases
