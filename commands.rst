@@ -359,6 +359,25 @@ Example
    2
    3
 
+accum OPERATOR LIST
+-------------------
+
+Notating :code:`OPERATOR` by :code:`#`, :code:`accum` returns
+
+.. code::
+
+   ((LIST[0] # LIST[1]) # LIST[2]) # LIST[3])...
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: accum $- (list 1 2 3 4)
+   -8
+
+.. note:: Just using :code:`-` here wouldn't be sufficient since any token after the function (:code:`accum` here) will be interpreted as a string unless it has a :code:`$` prefix.
+   
 
 search REGEX
 ------
