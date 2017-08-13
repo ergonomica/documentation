@@ -257,7 +257,23 @@ Example
    .: > 1 1337
    False
 
+len OBJECT
+----------
 
+Returns Python's :code:`len` on :code:`OBJECT`.
+
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: len (list 1 3 9)
+   3
+   .: len string
+   6
+
+   
 type OBJECT
 -----------
 
