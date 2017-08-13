@@ -424,6 +424,22 @@ Example
    .: ?dir /etc/fstab
    False
 
+?contains ITEM LIST
+-------------------
+
+Returns :code:`True` if :code:`ITEM` is within :code:`LIST`, :code:`False` if it isn't.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: ?contains 123123 (list 123123 44 444)
+   True
+   .: ?contains "not contained" (list "it really isn't" "contained")
+   False
+
+
 ?match REGEX STRING
 -------------------
 
