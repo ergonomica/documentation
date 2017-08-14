@@ -57,3 +57,12 @@ Explanation
 ~~~~~~~~~~~
 
 This defines a function, :code:`up`, which operates recursively on a depth :code:`n`. Until :code:`n` is 0, it invokes itself again (decrementing :code:`n` by 1), going up one directory level each time, until :code:`n` reaches :code:`0`.
+
+Find all directories 7 directory levels down that have more than two items
+==========================================================================
+
+
+.. code::
+   .: set is7dirsdown (lambda (dir) (= (count "/" dir) 7))
+   .: set containsmorethan2items (lambda (dir) (> (len (ls $dir)) 1))
+   .: filter containsmorethan2items (filter $is7dirsdown (find dir .*))

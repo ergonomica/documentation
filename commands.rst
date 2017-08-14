@@ -26,6 +26,36 @@ Example
    2
    1
 
+slice ARRAY INDEX1 [INDEX2]
+---------------------------
+
+If only :code:`INDEX1` is specified, returns the :code:`INDEX1` th element of :code:`ARRAY`. If :code:`ARRAY2` is specified, returns the elements in :code:`ARRAY` from indices :code:`INDEX1` to :code:`INDEX2`.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: slice (list 1 2 3) 0
+   1
+   .: slice (list 1 3 5 9 10) 2 4
+   5
+   9
+
+
+count ITEM STRING
+-----------------
+
+Returns the number of instances of string :code:`ITEM` within string :code:`STRING`.
+
+Example
+~~~~~~~
+
+.. code::
+
+   count aa aabbaba
+   1
+
 \= ARGS...
 ----------
 
