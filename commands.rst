@@ -340,6 +340,96 @@ Example
    int
    .: type (str 1)
    str
+   
+or BOOL1 BOOL2
+--------------
+
+ORs two boolean values.
+
+Example
+~~~~~~~
+
+.. code::
+	
+	.: or #t #f
+	True
+	.: or #f #f
+	False
+	.: or #t #t
+	True
+
+
+and BOOL1 BOOL2
+---------------
+
+ANDs two boolean values.
+
+Example
+~~~~~~~
+
+.. code::
+	
+	.: and #t #f
+	False
+	.: and #f #f
+	False
+	.: and #t #t
+	True
+	
+
+
+nor BOOL1 BOOL2
+----------------
+
+NORs two boolean values.
+
+Example
+~~~~~~~
+
+.. code::
+	
+	.: nor #t #f
+	False
+	.: nor #f #f
+	True
+	.: nor #t #t
+	False
+	
+
+nand BOOL1 BOOL2
+----------------
+
+NANDs two boolean values.
+
+Example
+~~~~~~~
+
+.. code::
+	
+	.: nand #t #f
+	True
+	.: nand #f #f
+	True
+	.: nand #t #t
+	False
+	
+
+xor BOOL1 BOOL2
+---------------
+
+XORs two boolean values.
+
+Example
+~~~~~~~
+
+.. code::
+	
+	.: xor #t #f
+	True
+	.: xor #f #f
+	False
+	.: xor #t #t
+	False
 
 
 int OBJECT
@@ -541,6 +631,28 @@ Example
    False
    .: ?file /qj0jq0-9qri0w5i0q9wi0tiw09ti
    False
+
+?link LINK
+----------
+
+Returns :code:`True` if :code:`LINK` is a symlink, :code:`False` if it isn't.
+
+Example
+~~~~~~~
+
+.. code::
+
+	.: ls
+	a.txt
+	.: ?file a.txt
+	True
+	.: ?link a.txt
+	False
+	.: link a.txt example_link
+	.: ?file a.txt
+	False
+	.: ?link a.txt
+	True
 
 
 ?dir DIR
@@ -996,6 +1108,29 @@ Example
    .: mv a.txt b.txt
    .: ls
    b.txt
+
+link SOURCE DESTINATION
+-----------------------
+
+Creates a symlink (or equivalent on Windows) mapping from :code:`DESTINATION` to the file at :code:`SOURCE`.
+
+Example
+~~~~~~~
+
+.. code::
+
+	.: ls
+	a.txt
+	.: link a.txt a_good_textfile.txt
+	.: ls
+	a.txt
+	a_good_textfile.txt
+	.: ?link a.txt
+	False
+	.: ?link a_good_textfile.txt
+	True
+	.: = (read a.txt) (read a_good_textfile.txt)
+	True
 
 
 exit
