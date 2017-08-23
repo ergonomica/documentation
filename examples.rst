@@ -14,7 +14,8 @@ Replace instances of a word in a file
    Test which is an Example
    of a file
    .: read a.txt | replace Example test {0} | write a.txt {}
-   
+
+
 Explanation
 -----------
    
@@ -27,6 +28,7 @@ Remove all .pyc files recursively
 .. code::
 
    .: find file .*pyc | rm {0}
+
 
 Explanation
 -----------
@@ -53,6 +55,7 @@ Define a function to go up one directory N times
 	       up (- $n 1)))
 	   (cd ..))
 
+
 Explanation
 ~~~~~~~~~~~
 
@@ -65,4 +68,11 @@ Find all directories 7 directory levels down that have more than two items
 .. code::
    .: set is7dirsdown (lambda (dir) (= (count "/" dir) 7))
    .: set containsmorethan2items (lambda (dir) (> (len (ls $dir)) 1))
-   .: filter containsmorethan2items (filter $is7dirsdown (find dir .*))
+   .: filter $containsmorethan2items (filter $is7dirsdown (find dir .*))
+
+Explanation
+~~~~~~~~~~~
+
+This program hinges on the fact that we can separate our conditional into two different statements---"is 7 directories down" and "contains more than 2 items". We create two functions that return boolean values as to whether their inputs fulfill these conditions. Then, we first filter by our "7 directories down" condition, and then our "contains more than 2 items" condition.
+
+.. note:: Here, we must prefix each function that we're filtering with with a :code:`$`, because otherwise they would be interpreted as strings. Functions are values in the namespace just as any other variable.
