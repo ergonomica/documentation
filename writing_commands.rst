@@ -74,6 +74,16 @@ Other commands are just regular Python ones, like builtin :code:`randint`:
        return random.randint(lower, upper)
    
 
-   
+============================
+ Writing Ergonomica Scripts
+============================
 
+Ergonomica, in addition to being a shell language, supports writing scripts in it. These scripts are simply a series of commands that are executed and their output printed, just as they would be at the REPL. For example, let's consider a script that'll remove all "bad" files (aka those that are not Python files ;) ). This would be a one liner,
 
+.. code::
+
+	#!/usr/bin/env ergo
+	
+	find file ".*\.[^py]" | rm {0}
+	
+Then, if this command were in your PATH, it would be callable as an Ergonomica script, or if it were in the current directory in a POSIX-shell and you had execute permissions, :code:`./command_name.ergo` would execute it.
