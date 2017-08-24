@@ -86,4 +86,10 @@ Ergonomica, in addition to being a shell language, supports writing scripts in i
 	
 	find file ".*\.[^py]" | rm {0}
 	
-Then, if this command were in your PATH, it would be callable as an Ergonomica script, or if it were in the current directory in a POSIX-shell and you had execute permissions, :code:`./command_name.ergo` would execute it.
+Then, if this command were in your PATH, it would be callable as an Ergonomica script, or if it were in the current directory in a POSIX-shell and you had execute permissions, :code:`./command_name.ergo` would execute it. From within Ergonomica, these scripts can be executed as simply as:
+
+.. code::
+
+	ergo command_name.ergo
+	
+Additionally, you can add the :code:`--login` flag in order to load :code:`~/.ergo/.ergo_profile`.

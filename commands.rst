@@ -1201,13 +1201,17 @@ Example
 size [-u UNIT] FILE...
 ----------------------
 
-size: Return the sizes of files.
+Return the sizes of files.
 
-    Usage:
-        size [-u UNIT] FILE...
+Example
+~~~~~~~
 
-    Options:
-        -u, --unit  Specify the unit of size in which to display the file.
+.. code::
+
+	.: size VirtualBox.app
+	VirtualBox.app: 487122 kilobyte(s)
+	.: size -u MB VirtualBox.app
+	VirtualBox.app: 475 megabyte(s)
 
     
 swap FILE1 FILE2
@@ -1215,8 +1219,34 @@ swap FILE1 FILE2
 
 Swap the names/contents of two files.
 
-    Usage:
-        swap <file>FILE1 <file>FILE2
+Example
+~~~~~~~
+
+.. code::
+
+	.: read a.txt
+	some contents
+	.: read b.txt
+	other contents
+	.: swap a.txt b.txt
+	.: read a.txt
+	other contents
+	.: read b.txt
+	some contents
+
+
+join STRING LIST
+----------------
+
+Returns the result of list :code:`LIST` joined by string :code:`STRING`.
+
+Example
+~~~~~~~
+
+.. code::
+	
+	.: join "_" (list this is an example string)
+	this_is_an_example_string
 
 
 read FILE
@@ -1227,15 +1257,29 @@ Reads the lines of FILE.
 Example
 ~~~~~~~
 
+.. code::
+	
+	.: read a.txt
+	this is
+	an example
+	file!
+	.: len (read a.txt)
+	3
 
     
-time
-----
+time [FORMAT]
+-------------
 
-    time: Display the current time. FORMAT is in strftime format.
+Display the current time. FORMAT is in strftime format. Defaults to :code:`"%b %d %Y %H:%M:%S"`.
 
-    Usage:
-        time [FORMAT]
+
+.. code::
+
+   .: time
+   Aug 24 2017 04:29:53
+   .: time "year: %Y time: %H:%M:%S"
+   year: 2017 time: 04:30:37
+	
     
 pwd
 ---

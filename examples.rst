@@ -76,3 +76,5 @@ Explanation
 This program hinges on the fact that we can separate our conditional into two different statements---"is 7 directories down" and "contains more than 2 items". We create two functions that return boolean values as to whether their inputs fulfill these conditions. Then, we first filter by our "7 directories down" condition, and then our "contains more than 2 items" condition.
 
 .. note:: Here, we must prefix each function that we're filtering with with a :code:`$`, because otherwise they would be interpreted as strings. Functions are values in the namespace just as any other variable.
+
+
