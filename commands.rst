@@ -82,10 +82,29 @@ Example
 
 .. code::
 
-   != 2 3 4 5
+   .: != 2 3 4 5
    True
-   != 2 2 2 2 2
+   .: != 2 2 2 2 2
    False
+   
+\~ ARGS...
+----------
+
+Returns :code:`False` if all arguments are equal, :code:`True` otherwise, ignoring order.
+
+Example
+~~~~~~~
+
+.. code::
+
+	.: = (list 1 2 3) (list 3 2 1)
+	False
+	.: ~ (list 1 2 3) (list 3 2 1)
+	True
+	.: ~ abba baab
+	True
+	.: ~ 123 123
+	[ergo: ~=]: Non-iterable passed.
 
 
 not BOOL
