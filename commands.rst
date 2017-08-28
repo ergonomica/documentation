@@ -122,6 +122,23 @@ Example
    .: not (= 2 3)
    True
 
+repr STRING
+-----------
+
+Returns all escape sequences necessary for representing :code:`STRING`.
+
+Example
+~~~~~~~
+
+.. code::
+
+	.: repr 123
+	123
+	.: repr " a b c "
+	u' a b c '
+	.: repr " a\nb"
+	u' a\nb'rimt
+
 apply FUNCTION ARGS
 -------------------
 
@@ -584,21 +601,6 @@ Example
    1
    3
    2
-
-
-trim STRING
------------
-
-Returns :code:`STRING` with all surrounding whitespace removed.
-
-Example
-~~~~~~~
-
-.. code::
-
-	.: trim "    this is an        example "
-	this is an        example
-
 
 split SEP STRING
 ----------------
@@ -1214,6 +1216,25 @@ Example
 
    exit
 
+
+trim [head|tail] STRING
+-----------------------
+
+Trims surrounding whitespace in :code:`STRING`.
+
+Example
+~~~~~~~
+
+.. code::
+
+	.: print " a b c "
+	 a b c
+	.: trim " a b c "
+	a b c
+	.: repr (trim head " a b c ")
+	u'a b c '
+	.: repr (trim tail " a b c ")
+	u' a b c'
 
 
 ls <directory>[DIR] [-c | --count-files][-d | --date] [-h | --hide-dotfiles]
