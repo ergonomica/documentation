@@ -14,16 +14,12 @@ Assuming you have installed Ergonomica through :code:`pip`, in Python simply imp
 
 .. code:: python
 	
-	from ergonomica.ergo import ergo
+	from ergonomica import ergo
 
 Then, the :code:`ergo()` function in Python will execute any strings passed into it. For example,
 
 .. code:: python
 
-	>>> from ergonomica.ergo import ergo
+	>>> from ergonomica import ergo
 	>>> ergo('print "hi there folks!"')
 	'hi there folks!'
-
-
-Interfacing with Python
-=======================
