@@ -77,4 +77,38 @@ This program hinges on the fact that we can separate our conditional into two di
 
 .. note:: Here, we must prefix each function that we're filtering with with a :code:`$`, because otherwise they would be interpreted as strings. Functions are values in the namespace just as any other variable.
 
+Backup all GitHub repositories listed in a file
+===============================================
+
+First, we initialize a file :code:`github_backup.ergo`:
+
+.. code::
+	
+	#!/usr/bin/env ergo
+
+	set backup_repo (lambda (user url) (
+	  if (contains "/" $url) (git clone (+ "https://github.com/" $url))
+	  else (git clone (+ "https://github.com/" $user "/" $url))
+	  ))
+
+	set repos $(rest (read repos.txt))
+	set user $(first (read repos.txt))
+
+	rm backups
+	mkdir backups
+	cd backups
+
+	print $repos | backup_repo $user {0}
+	
+In :code:`repos.txt`, we list all the repositories which we wish to backup, in addition to the GitHub username. All personal repositories do not require a prefix of the username.
+
+.. code::
+
+	lschumm
+	isptweet
+	dict_optim
+	ergonomica/ergonomica
+	
+Then, whenever :code:`github_backup.ergo` is run, all repositories are backed up in subdirectories of :code:`backups`.
+
 

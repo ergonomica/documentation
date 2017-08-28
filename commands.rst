@@ -303,6 +303,22 @@ Example
    .: len string
    6
 
+unique ARRAY
+------------
+
+Returns an array with one of each element in :code:`ARRAY`.
+
+Example
+~~~~~~~
+
+.. code::
+
+	.: unique (list 1 1 2 2 3 3 3 4)
+	1
+	2
+	3
+	4
+
    
 type OBJECT
 -----------
@@ -447,6 +463,25 @@ Example
    .: int 3.104
    3
    
+bool OBJECT
+-----------
+
+Converts :code:`OBJECT` to a boolean.
+
+Example
+~~~~~~~
+
+.. code::
+
+	.: bool "123123"
+	True
+	.: bool ""
+	False
+	.: bool 0
+	False
+	.: bool 128
+	True
+
 
 float OBJECT
 ------------
@@ -531,7 +566,22 @@ Example
    3
    2
 
-split STRING SEP
+
+trim STRING
+-----------
+
+Returns :code:`STRING` with all surrounding whitespace removed.
+
+Example
+~~~~~~~
+
+.. code::
+
+	.: trim "    this is an        example "
+	this is an        example
+
+
+split SEP STRING
 ----------------
 
 Splits :code:`STRING` by seperator :code:`SEP`.
@@ -541,7 +591,7 @@ Example
 
 .. code::
 
-   .: split 1,2,3 ,
+   .: split , 1,2,3
    1
    2
    3
@@ -585,7 +635,7 @@ Example
 
 
 search REGEX
-------
+------------
 
 Searches (and returns) all matches of :code:`REGEX` in :code:`STRING`.
 
