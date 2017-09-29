@@ -31,18 +31,6 @@ In this example, the :code:`$` character is used to indicate variable substituti
    .: f 33
    33
    
-
-Functions can have multiple return values (None values filtered out)
---------------------------------------------------------------------
-
-.. code:: lisp
-
-   .: (set x (lambda (x) (+ x 1) (+ x 2)))
-   .: x 33
-   34
-   35
-
-   
 Pipelines
 ---------
 
