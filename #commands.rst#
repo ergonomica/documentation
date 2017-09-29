@@ -613,15 +613,14 @@ Example
 .. code::
 
    .: set example_func (lambda (x) (+ 1 (- $x 2)))
-   .: example_func 2
-   1
+   .: example_func 3
+   2
    .: edit_func example_func
    /var/folders/b_/3lj8zn3d65jgk9ny110frgyr0000gn/T/tmp186Wbn
    .: read /var/folders/b_/3lj8zn3d65jgk9ny110frgyr0000gn/T/tmp186Wbn
-   + 1 (- $x 2)
-   .: write /var/folders/b_/3lj8zn3d65jgk9ny110frgyr0000gn/T/tmp186Wbn "+ 1 (+ $x 2)"
-   .: example_func 2
-   3
+   + 1 (- x 2)
+   .: write "
+     
    
 spawn FUNCTION
 --------------

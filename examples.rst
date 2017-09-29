@@ -73,7 +73,7 @@ Find all directories 7 directory levels down that have more than two items
 Explanation
 ~~~~~~~~~~~
 
-This program hinges on the fact that we can separate our conditional into two different statements---"is 7 directories down" and "contains more than 2 items". We create two functions that return boolean values as to whether their inputs fulfill these conditions. Then, we first filter by our "7 directories down" condition, and then our "contains more than 2 items" condition.
+This program hinges on the fact that we can separate our conditional into two different statements---"is 7 directories down" and "contains more than 2 items". We create two functions that return boolean values as to whether their inputs fulfill these conditions. Then, we first filter by our "7 directories down" condition, and then our "contains more than 2 items" condition. Note that it would be possible to simply substitute the values in of the two filter functions as lambdas in the final expression, however breaking it up like above makes it easier to debug and conceptualize.
 
 .. note:: Here, we must prefix each function that we're filtering with with a :code:`$`, because otherwise they would be interpreted as strings. Functions are values in the namespace just as any other variable.
 
@@ -89,7 +89,7 @@ First, we initialize a file :code:`github_backup.ergo`:
 	set backup_repo (lambda (user url) (
 	  if (contains "/" $url) (git clone (+ "https://github.com/" $url))
 	  else (git clone (+ "https://github.com/" $user "/" $url))
-	  ))
+	))
 
 	set repos $(rest (read repos.txt))
 	set user $(first (read repos.txt))
@@ -111,4 +111,31 @@ In :code:`repos.txt`, we list all the repositories which we wish to backup, in a
 	
 Then, whenever :code:`github_backup.ergo` is run, all repositories are backed up in subdirectories of :code:`backups`.
 
+
+Keep track of the number of files modified in a directory
+=========================================================
+
+.. code::
+
+   .: set mcount 0
+   .: on_fs_update . (lambda (x) (set mcount (+ $mcount 1)))
+
+Explanation
+~~~~~~~~~~~
+   
+First, we initialize a variable that will be in the scope of the function passed to :code:`on_fs_update`, :code:`mcount` (modified count). Then, we use the :code:`on_fs_update` function on the current directory (i.e., :code:`.`), passing to it a function that will simply increment :code:`mcount`.
+
+Spawn a process in the background
+=================================
+
+Suppose you have a massive hard drive and you'd like to delete all the files. However, since this might take a while, the :code:`rm` operation will likely be slow.
+
+.. code::
+
+   spawn (lambda () (slice -1 (list (rm /mnt/bigdrive) "Disk wipe completed.")))
+
+Explanation
+~~~~~~~~~~~
+
+What this snippet does is spawns a process in the background that will erase the drive. :code:`slice` is used so that first, a list will be created with the result of :code:`rm` as well as the string :code:`"Disk wipe completed`. It will have to wait until all elements in the array are evaluated (e.g., the :code:`rm` operation), and then will return the second element---printing :code:`"Disk wipe completed."` to the console. 
 
