@@ -38,9 +38,9 @@ Ergonomica has piping built into it's S-Expression syntax. These seperate comman
 
 .. code:: lisp
 
-   .: print 1 2 3 | first {}
+   .: print 1 2 3 | first ${}
    1
-   .: print 1 2 3 | rest {}
+   .: print 1 2 3 | rest ${}
    (2, 3)
 
 However, portions of these blocks may be specified. For example, if we wanted to print every other element, we could create a pipeline with a blocksize of two and always print the 2nd element of that array.
@@ -52,7 +52,7 @@ However, portions of these blocks may be specified. For example, if we wanted to
    b.txt
    c.txt
    d.txt
-   .: ls | print {1}
+   .: ls | print ${1}
    b.txt
    d.txt
 
@@ -72,11 +72,11 @@ Then, filtering for our indices yields the values expected:
    [a.txt, b.txt][1] -> b.txt
    [c.txt, d.txt][1] -> d.txt
 
-However, suppose you want :code:`a.txt` and :code:`c.txt` (i.e., not starting alternating with :code:`b.txt`). Specifying :code:`{0}` would just print every element (a blocksize of one, i.e., a block for every element)
+However, suppose you want :code:`a.txt` and :code:`c.txt` (i.e., not starting alternating with :code:`b.txt`). Specifying :code:`${0}` would just print every element (a blocksize of one, i.e., a block for every element)
 
 .. code:: lisp
 
-   .: ls | print {0}
+   .: ls | print ${0}
    a.txt
    b.txt
    c.txt
@@ -86,7 +86,7 @@ You may specify the blocksize explicitly like so:
 
  .. code:: lisp
 
-    .: ls | print {0/2}
+    .: ls | print ${0/2}
     a.txt
     c.txt
 

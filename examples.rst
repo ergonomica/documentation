@@ -13,7 +13,7 @@ Replace instances of a word in a file
    this is Example
    Test which is an Example
    of a file
-   .: read a.txt | replace Example test {0} | write a.txt {}
+   .: read a.txt | replace Example test {0} | write a.txt ${}
 
 
 Explanation
@@ -27,7 +27,7 @@ Remove all .pyc files recursively
 
 .. code::
 
-   .: find file .*pyc | rm {0}
+   .: find file .*pyc | rm ${0}
 
 
 Explanation
@@ -41,8 +41,8 @@ Add hashbangs to any Python file (if they don't exist)
 
 .. code::
 
-   .: find file .*py | if (not (?contains (read {0}) "#!/usr/bin/env python"))
-                          (write {0} (+ (list "#!/usr/bin/env python") (read {0})))
+   .: find file .*py | if (not (?contains (read ${0}) "#!/usr/bin/env python"))
+                          (write ${0} (+ (list "#!/usr/bin/env python") (read ${0})))
 
 			  
 Define a function to go up one directory N times
@@ -51,7 +51,7 @@ Define a function to go up one directory N times
 .. code::
 
    set up (lambda (n) (
-           if (!= n 0) (
+           if (!= $n 0) (
 	       up (- $n 1)))
 	   (cd ..))
 
@@ -66,7 +66,7 @@ Find all directories 7 directory levels down that have more than two items
 
 
 .. code::
-   .: set is7dirsdown (lambda (dir) (= (count "/" dir) 7))
+   .: set is7dirsdown (lambda (dir) (= (count "/" $dir) 7))
    .: set containsmorethan2items (lambda (dir) (> (len (ls $dir)) 1))
    .: filter $containsmorethan2items (filter $is7dirsdown (find dir .*))
 
@@ -91,14 +91,14 @@ First, we initialize a file :code:`github_backup.ergo`:
 	  else (git clone (+ "https://github.com/" $user "/" $url))
 	))
 
-	set repos $(rest (read repos.txt))
-	set user $(first (read repos.txt))
+	set repos (rest (read repos.txt))
+	set user (first (read repos.txt))
 
 	rm backups
 	mkdir backups
 	cd backups
 
-	print $repos | backup_repo $user {0}
+	print $repos | backup_repo $user ${0}
 	
 In :code:`repos.txt`, we list all the repositories which we wish to backup, in addition to the GitHub username. All personal repositories do not require a prefix of the username.
 
@@ -139,3 +139,13 @@ Explanation
 
 What this snippet does is spawns a process in the background that will erase the drive. :code:`slice` is used so that first, a list will be created with the result of :code:`rm` as well as the string :code:`"Disk wipe completed`. It will have to wait until all elements in the array are evaluated (e.g., the :code:`rm` operation), and then will return the second element---printing :code:`"Disk wipe completed."` to the console. 
 
+Super Simple REPL
+-----------------
+
+.. code::
+
+	#!/usr/bin/env ergo
+	
+	set eventloop (lambda (string) (
+		if (split $string)
+	))
