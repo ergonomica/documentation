@@ -6,7 +6,7 @@
 Welcome to Ergonomica's Documentation!
 ======================================
 
-Ergonomica is a cross-platform shell language, implemented in Python. Ergonomica aims to modernize the terminal, in an easily-extensible and usable language, independent of the OS on which it runs. It uses existing core utilities such as the :code:`os` and :code:`shutil` packages, as well as other utilities written in Python, such as the pyvim editor, providing built-in tools that are not os-dependent. Existing Python language features such as asynchronous returning may replace components of the shell such as piping.
+Ergonomica is a cross-platform shell language implemented in Python that aims to redesign the shell in a more standard, easy-to-use, and powerful way than traditional shells. It is designed as a fully-functional S-expression based language with a few traditional shell features such as flags and piping to combine the functionality of a Lisp with the convenience of the UNIX shell.
 
 To install simply run
 
