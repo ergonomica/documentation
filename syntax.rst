@@ -119,3 +119,20 @@ Or to test for a variety of different conditions, the :code:`elif` statement can
    if (> $n 5) (print "It's greater than five.") elif (> $n 0) (print "Well at least it's positive.") else (print "Well shucks")
 
 .. note:: These statements may have linebreaks in any location; for example, each :code:`elif` could be on a newline. This does not affect their behavior.
+
+:code:`with` statement
+----------------------
+
+.. code::
+
+   with (find file .*pyc) as python_files (
+      
+   )
+
+It also allows you to perform functions with side effects on the system.
+
+.. code::
+
+   with (rm /) as _ (
+      
+   )

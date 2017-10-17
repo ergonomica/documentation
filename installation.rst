@@ -15,6 +15,14 @@ On first invocation, Ergonomica will create the :code:`~/.ergo` directory, :code
 
    Do you want to install epm (the Ergonomica Package Manager)? (Y/n):
 
-The Ergonomica Package Manager (EPM) is a 
+The Ergonomica Package Manager (EPM) is a tool to download standard Ergonomica packages to add functionality to your shell. It is highly recommended to install it.
 
+FreeBSD Caveat
+==============
 
+For some reason, FreeBSD doesn't include the standard python :code:`sqlite3` library by default. You'll have to install it:
+
+.. code::
+
+   pkg install databases/py-sqlite3
+   

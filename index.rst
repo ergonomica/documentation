@@ -14,6 +14,16 @@ To install simply run
 
    pip install ergonomica
 
+Offically Supported Platforms
+-----------------------------
+
+Note that other platforms may likely work with Ergonomica---the following are all platforms that are regularly tested with new Ergonomica releases.
+
+- MacOS
+- Linux
+- FreeBSD
+- Windows
+   
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
