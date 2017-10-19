@@ -566,6 +566,35 @@ Example
    5
    6
 
+last ARRAY
+----------
+
+Returns the last element in an array.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: last (list 1 2 3 4 5 6)
+   6
+
+rrest ARRAY
+-----------
+
+Returns the *r*eversed *r*est---that is, all the elements leading up to the last element *excluding* the last element.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: rrest (list 1 2 3 4 5 6)
+   1
+   2
+   3
+   4
+   5
 
 reverse ARRAY
 -------------
@@ -601,6 +630,23 @@ Example
    1
    3
    2
+
+append ARR ITEM
+---------------
+
+Returns ARR with ITEM appended to the end of it. Equivalent to :code:`+ $ARR (list $ITEM)`.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: append (list 1 2 3) 4
+   1
+   2
+   3
+   4
+
    
 edit_func FUNCNAME
 ------------------
