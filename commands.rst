@@ -1518,6 +1518,62 @@ Example
    .: ls
    serious_picture.png
 
+hash ITEMS
+----------
+
+Build a hashtable out of :code:`ITEMS`.
+
+Example
+~~~~~~~
+
+.. code::
+
+   hash (list 1 2 3 4)
+   {1: 2, 3: 4}
+
+hash-get ITEM HASHTABLE
+-----------------------
+
+Returns the item mapped to :code:`ITEM` in :code:`HASHTABLE`.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: set table (hash (list 1 2 3 4))
+   .: print $table
+   {1: 2, 3: 4}
+   .: hash-get 1 $table
+   2
+   .: hash-get 3 $table
+   4
+
+hash-add ITEM VALUE HASHTABLE
+-----------------------------
+
+Returns a copy of :code:`HASHTABLE` with :code:`ITEM` mapped to :code:`VALUE`.
+
+Example
+~~~~~~~
+
+.. code::
+
+   .: hash-add 'a' 'b' (hash (list 1 2))
+   {'a': 'b', 1: 2}
+
+hash-rem ITEM HASHTABLE
+-----------------------
+
+Returns a copy of :code:`HASHTABLE` with :code:`ITEM` removed.
+
+.. code::
+
+   .: set table (hash (list 1 2 3 4 5 6))
+   .: print $table
+   {1: 2, 3: 4, 5: 6}
+   .: hash-rem 5 $table
+   {1: 2, 3: 4}
 
 sysinfo
 -------
